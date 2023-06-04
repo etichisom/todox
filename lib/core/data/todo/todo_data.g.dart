@@ -14,6 +14,7 @@ _$_TodoData _$$_TodoDataFromJson(Map<String, dynamic> json) => _$_TodoData(
       time: json['time'] as String?,
       category: json['category'] as String?,
       note: json['note'] as String?,
+      status: json['status'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_TodoDataToJson(_$_TodoData instance) =>
@@ -25,4 +26,5 @@ Map<String, dynamic> _$$_TodoDataToJson(_$_TodoData instance) =>
       'time': instance.time,
       'category': instance.category,
       'note': instance.note,
+      'status': instance.status,
     };

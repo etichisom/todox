@@ -20,31 +20,33 @@ class Field extends StatefulWidget {
   final EdgeInsets? padding;
   final int? maxLength;
   final int? maxLines;
+  final String? errorText;
 
   const Field(
       {super.key,
-        this.controller,
-        this.padding,
-        this.height = 54,
-        this.onTap,
-        this.enable = true,
-        this.validate,
-        this.hintColor = Colors.grey,
-        this.fillColor = Colors.white,
-        this.width = double.maxFinite,
-        this.obSecure = false,
-        this.borderRadius = 10,
-        this.hint = "",
-        this.textInputType = TextInputType.text,
-        this.prefixIcon,
-        this.suffixIcon,
-        this.onChanged,
-        this.contentPadding,
-        this.maxLength,
-        this.maxLines,
-        this.align,
-        this.disableBorderColor,
-        this.borderSideColor});
+      this.controller,
+      this.errorText,
+      this.padding,
+      this.height = 54,
+      this.onTap,
+      this.enable = true,
+      this.validate,
+      this.hintColor = Colors.grey,
+      this.fillColor = Colors.white,
+      this.width = double.maxFinite,
+      this.obSecure = false,
+      this.borderRadius = 10,
+      this.hint = "",
+      this.textInputType = TextInputType.text,
+      this.prefixIcon,
+      this.suffixIcon,
+      this.onChanged,
+      this.contentPadding,
+      this.maxLength,
+      this.maxLines,
+      this.align,
+      this.disableBorderColor,
+      this.borderSideColor});
 
   @override
   State<Field> createState() => _FieldState();
@@ -73,6 +75,7 @@ class _FieldState extends State<Field> {
             return widget.validate == null ? null : widget.validate!(e!);
           },
           decoration: InputDecoration(
+            errorText: widget.errorText,
             hintStyle: TextStyle(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w400,
@@ -83,16 +86,16 @@ class _FieldState extends State<Field> {
                 : Transform.scale(scale: 0.7, child: widget.prefixIcon),
             suffixIcon: widget.obSecure
                 ? InkWell(
-                onTap: () {
-                  setSecure();
-                },
-                child: icon())
+                    onTap: () {
+                      setSecure();
+                    },
+                    child: icon())
                 : Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    widget.suffixIcon??const SizedBox(),
-                  ],
-                ),
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      widget.suffixIcon ?? const SizedBox(),
+                    ],
+                  ),
 
             // errorBorder: OutlineInputBorder(
             //   borderRadius: BorderRadius.circular(15),
@@ -161,28 +164,28 @@ class SearchField extends StatefulWidget {
 
   const SearchField(
       {super.key,
-        this.controller,
-        this.padding,
-        this.height = 54,
-        this.onTap,
-        this.enable = true,
-        this.validate,
-        this.hintColor = Colors.white,
-        this.fillColor = Colors.transparent,
-        this.width = double.maxFinite,
-        this.obSecure = false,
-        this.borderRadius = 10,
-        this.hint = "",
-        this.textInputType = TextInputType.text,
-        this.prefixIcon,
-        this.suffixIcon,
-        this.onChanged,
-        this.contentPadding,
-        this.maxLength,
-        this.maxLines,
-        this.align,
-        this.disableBorderColor,
-        this.borderSideColor});
+      this.controller,
+      this.padding,
+      this.height = 54,
+      this.onTap,
+      this.enable = true,
+      this.validate,
+      this.hintColor = Colors.white,
+      this.fillColor = Colors.transparent,
+      this.width = double.maxFinite,
+      this.obSecure = false,
+      this.borderRadius = 10,
+      this.hint = "",
+      this.textInputType = TextInputType.text,
+      this.prefixIcon,
+      this.suffixIcon,
+      this.onChanged,
+      this.contentPadding,
+      this.maxLength,
+      this.maxLines,
+      this.align,
+      this.disableBorderColor,
+      this.borderSideColor});
 
   @override
   State<SearchField> createState() => _SearchFieldState();
@@ -221,10 +224,10 @@ class _SearchFieldState extends State<SearchField> {
                 : Transform.scale(scale: 0.7, child: widget.prefixIcon),
             suffixIcon: widget.obSecure
                 ? InkWell(
-                onTap: () {
-                  setSecure();
-                },
-                child: icon())
+                    onTap: () {
+                      setSecure();
+                    },
+                    child: icon())
                 : widget.suffixIcon,
 
             // errorBorder: OutlineInputBorder(
@@ -233,7 +236,7 @@ class _SearchFieldState extends State<SearchField> {
             // ),
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(widget.borderRadius),
-                borderSide: const BorderSide(color: Colors.transparent)) ,
+                borderSide: const BorderSide(color: Colors.transparent)),
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(widget.borderRadius),
                 borderSide: const BorderSide(color: Colors.transparent)),

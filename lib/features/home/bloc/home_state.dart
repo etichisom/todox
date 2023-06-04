@@ -1,20 +1,20 @@
 part of 'home_bloc.dart';
 
-abstract class HomeState {
-
-}
+abstract class HomeState {}
 
 class InitialHomeState extends HomeState {}
 
 class LoadingHomeState extends HomeState {}
 
-class LoadingLoadedState extends HomeState {
-  final List<TodoData> todos;
-  LoadingLoadedState(this.todos);
+class LoadedHomeState extends HomeState {
+  final List<TodoData> allTodo;
+  final List<TodoData> pendingTodo;
+  final List<TodoData> completedTodo;
+  LoadedHomeState({
+    required this.allTodo,
+    required this.pendingTodo,
+    required this.completedTodo,
+  });
 }
 
-
-class ErrorTodoState extends HomeState {
-
-}
-
+class ErrorTodoState extends HomeState {}

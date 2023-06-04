@@ -5,6 +5,9 @@ import 'package:todox/core/theme/color.dart';
 
 ThemeData appTheme = ThemeData(
   brightness: Brightness.light,
+  appBarTheme: const AppBarTheme(
+    backgroundColor: AppColors.primary900
+  ),
   scaffoldBackgroundColor: const Color(0xffF1F5F9), //const Color(0xffE0E0E0)
   inputDecorationTheme: InputDecorationTheme(
     enabledBorder: OutlineInputBorder(

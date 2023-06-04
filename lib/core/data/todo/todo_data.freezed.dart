@@ -27,6 +27,7 @@ mixin _$TodoData {
   String? get time => throw _privateConstructorUsedError;
   String? get category => throw _privateConstructorUsedError;
   String? get note => throw _privateConstructorUsedError;
+  bool get status => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -46,7 +47,8 @@ abstract class $TodoDataCopyWith<$Res> {
       String? date,
       String? time,
       String? category,
-      String? note});
+      String? note,
+      bool status});
 }
 
 /// @nodoc
@@ -69,6 +71,7 @@ class _$TodoDataCopyWithImpl<$Res, $Val extends TodoData>
     Object? time = freezed,
     Object? category = freezed,
     Object? note = freezed,
+    Object? status = null,
   }) {
     return _then(_value.copyWith(
       title: freezed == title
@@ -99,6 +102,10 @@ class _$TodoDataCopyWithImpl<$Res, $Val extends TodoData>
           ? _value.note
           : note // ignore: cast_nullable_to_non_nullable
               as String?,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -117,7 +124,8 @@ abstract class _$$_TodoDataCopyWith<$Res> implements $TodoDataCopyWith<$Res> {
       String? date,
       String? time,
       String? category,
-      String? note});
+      String? note,
+      bool status});
 }
 
 /// @nodoc
@@ -138,6 +146,7 @@ class __$$_TodoDataCopyWithImpl<$Res>
     Object? time = freezed,
     Object? category = freezed,
     Object? note = freezed,
+    Object? status = null,
   }) {
     return _then(_$_TodoData(
       title: freezed == title
@@ -168,6 +177,10 @@ class __$$_TodoDataCopyWithImpl<$Res>
           ? _value.note
           : note // ignore: cast_nullable_to_non_nullable
               as String?,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -182,7 +195,8 @@ class _$_TodoData implements _TodoData {
       this.date,
       this.time,
       this.category,
-      this.note});
+      this.note,
+      this.status = false});
 
   factory _$_TodoData.fromJson(Map<String, dynamic> json) =>
       _$$_TodoDataFromJson(json);
@@ -201,10 +215,13 @@ class _$_TodoData implements _TodoData {
   final String? category;
   @override
   final String? note;
+  @override
+  @JsonKey()
+  final bool status;
 
   @override
   String toString() {
-    return 'TodoData(title: $title, id: $id, uid: $uid, date: $date, time: $time, category: $category, note: $note)';
+    return 'TodoData(title: $title, id: $id, uid: $uid, date: $date, time: $time, category: $category, note: $note, status: $status)';
   }
 
   @override
@@ -219,13 +236,14 @@ class _$_TodoData implements _TodoData {
             (identical(other.time, time) || other.time == time) &&
             (identical(other.category, category) ||
                 other.category == category) &&
-            (identical(other.note, note) || other.note == note));
+            (identical(other.note, note) || other.note == note) &&
+            (identical(other.status, status) || other.status == status));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, title, id, uid, date, time, category, note);
+  int get hashCode => Object.hash(
+      runtimeType, title, id, uid, date, time, category, note, status);
 
   @JsonKey(ignore: true)
   @override
@@ -249,7 +267,8 @@ abstract class _TodoData implements TodoData {
       final String? date,
       final String? time,
       final String? category,
-      final String? note}) = _$_TodoData;
+      final String? note,
+      final bool status}) = _$_TodoData;
 
   factory _TodoData.fromJson(Map<String, dynamic> json) = _$_TodoData.fromJson;
 
@@ -267,6 +286,8 @@ abstract class _TodoData implements TodoData {
   String? get category;
   @override
   String? get note;
+  @override
+  bool get status;
   @override
   @JsonKey(ignore: true)
   _$$_TodoDataCopyWith<_$_TodoData> get copyWith =>

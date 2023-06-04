@@ -1,14 +1,18 @@
 part of 'home_bloc.dart';
 
 
-abstract class TodoEvent{}
+abstract class HomeEvent{}
 
-class TodoEventAdd extends TodoEvent{
-  final TodoData todoData;
-  TodoEventAdd(this.todoData);
+class LoadTodoHomeEvent extends HomeEvent{
+ final  List<TodoData> todo;
+  LoadTodoHomeEvent(this.todo);
 }
 
-class TodoEventEdit extends TodoEvent{
+class LoadTodoRequestEvent extends HomeEvent{
+  LoadTodoRequestEvent();
+}
+
+class TodoEventEdit extends HomeEvent{
   final TodoData todoData;
   TodoEventEdit(this.todoData);
 }

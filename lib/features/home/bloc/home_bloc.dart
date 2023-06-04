@@ -5,18 +5,30 @@ import 'package:todox/features/todo/data/repository/todo_repo_impl.dart';
 part 'home_event.dart';
 part 'home_state.dart';
 
-class AuthBloc extends Bloc<TodoEvent, HomeState> {
+class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final TodoRepositoryImpl todoRepositoryImpl;
-  AuthBloc({required this.todoRepositoryImpl}) : super(InitialHomeState()) {
-    on<TodoEventAdd>((event, emit) async {
+  HomeBloc({required this.todoRepositoryImpl}) : super(InitialHomeState()) {
+    on<LoadTodoRequestEvent>((event, emit) async {
       try {
         emit(LoadingHomeState());
-        todoRepositoryImpl.getTodo().listen((event) {
-          emit(LoadingLoadedState(event));
+        todoRepositoryImpl.getTodo().listen((event) async {
+          add(LoadTodoHomeEvent(event));
         });
       } catch (e) {
         emit(ErrorTodoState());
       }
+    });
+
+    on<LoadTodoHomeEvent>((event, emit) {
+      emit(
+        LoadedHomeState(
+          allTodo: event.todo,
+          pendingTodo:
+              event.todo.where((element) => element.status == false).toList(),
+          completedTodo:
+              event.todo.where((element) => element.status == true).toList(),
+        ),
+      );
     });
   }
 }

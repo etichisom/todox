@@ -49,7 +49,6 @@ class TodoRepositoryImpl extends TodoRepository {
           .listen((event) {
         List<TodoData> todoList = [];
         for (var e in event.docs) {
-          todoList = [];
           todoList.add(TodoData.fromJson(e.data() as Map<String, dynamic>));
         }
         todo.add(todoList);

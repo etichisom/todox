@@ -13,8 +13,9 @@ class TodoData with _$TodoData {
     String? date,
     String? time,
     String? category,
-    String? note
-
+    String? note,
+    @Default(false)
+    bool status,
   }) = _TodoData;
 
   factory TodoData.fromJson(Map<String, dynamic> json) => _$TodoDataFromJson(json);

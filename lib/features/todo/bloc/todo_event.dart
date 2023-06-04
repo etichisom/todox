@@ -1,14 +1,30 @@
 part of 'todo_bloc.dart';
 
+abstract class TodoEvent {}
 
-abstract class TodoEvent{}
-
-class TodoEventAdd extends TodoEvent{
-  final TodoData todoData;
-  TodoEventAdd(this.todoData);
+class TodoEventAdd extends TodoEvent {
+  TodoEventAdd();
 }
 
-class TodoEventEdit extends TodoEvent{
+class TodoEventEdit extends TodoEvent {
   final TodoData todoData;
   TodoEventEdit(this.todoData);
+}
+
+class AddTitleTodoEvent extends TodoEvent {
+  final String title;
+  AddTitleTodoEvent(this.title);
+}
+
+class AddNoteTodoEvent extends TodoEvent {
+  final String note;
+  AddNoteTodoEvent(this.note);
+}
+
+class AddDateTodoEvent extends TodoEvent {
+  AddDateTodoEvent();
+}
+
+class AddTimeTodoEvent extends TodoEvent {
+  AddTimeTodoEvent();
 }
