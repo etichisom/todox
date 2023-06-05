@@ -26,3 +26,6 @@ You should follow the [Flutter installation guide here](https://flutter.dev/docs
 ### Running the application
 All you need to run the application is `flutter run`
 
+[Download apk ](https://drive.google.com/file/d/1alWFBVMXpm_odmd8qCFUiWSFBn22mlkE/view?usp=sharing)
+
+
