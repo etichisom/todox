@@ -25,6 +25,5 @@ class AuthRepositoryImpl extends AuthRepository {
     } catch (e) {
       throw ServerError('Something went wrong');
     }
-
   }
 }

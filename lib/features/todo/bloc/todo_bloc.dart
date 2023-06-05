@@ -25,13 +25,12 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
           await todoRepositoryImpl.editTodo(state.todoData);
         } else {
           await todoRepositoryImpl.addTodo(state.todoData.copyWith(
-            uid: FirebaseAuth.instance.currentUser?.uid??"",
+            uid: FirebaseAuth.instance.currentUser?.uid ?? "",
             id: DateTime.now().millisecondsSinceEpoch.toString(),
           ));
         }
         emit(SuccessTodoState(state.todoData));
       } catch (e) {
-        print(e.toString());
         emit(ErrorTodoState(state.todoData));
       }
     });
@@ -56,7 +55,6 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
           ),
         ),
       );
-
     });
 
     on<AddNoteTodoEvent>((event, emit) {

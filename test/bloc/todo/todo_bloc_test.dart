@@ -1,6 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:todox/features/auth/data/repository/auth_repo_impl.dart';
 import 'package:todox/features/todo/bloc/todo_bloc.dart';
 import 'package:todox/features/todo/data/repository/todo_repo_impl.dart';
 import 'package:todox/features/todo/page/add_task.dart';
@@ -9,9 +8,7 @@ import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
 import 'todo_bloc_test.mocks.dart';
 
-@GenerateMocks([
-  TodoRepositoryImpl
-])
+@GenerateMocks([TodoRepositoryImpl])
 void main() {
   group('TodoBloc test', () {
     late MockTodoRepositoryImpl todoRepository;
@@ -62,8 +59,8 @@ void main() {
 
     blocTest(
       'save task',
-      setUp: (){
-        when(todoRepository.addTodo(TodoData()))
+      setUp: () {
+        when(todoRepository.addTodo(const TodoData()))
             .thenAnswer((realInvocation) => Future.value(true));
       },
       build: () => todoBloc,

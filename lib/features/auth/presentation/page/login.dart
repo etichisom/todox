@@ -25,14 +25,15 @@ class Login extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    'Welcome To TodoX',
-                    style: TextStyle(
-                      fontSize: 30.sp,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
-                    )).animate().fade().scale(),
-                  SizedBox(height: 30.h,),
+                  Text('Welcome To TodoX',
+                      style: TextStyle(
+                        fontSize: 30.sp,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                      )).animate().fade().scale(),
+                  SizedBox(
+                    height: 30.h,
+                  ),
                   SvgButton(
                     text: 'Sign in with Google',
                     onPressed: () {

@@ -5,41 +5,31 @@ import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
 import 'auth_bloc_test.mocks.dart';
 import 'package:todox/features/auth/bloc/auth_bloc.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 @GenerateMocks([AuthRepositoryImpl])
 void main() {
-  group('', () {
+  group('AuthBloc test', () {
     late MockAuthRepositoryImpl authRepositoryImpl;
     late AuthBloc authBloc;
 
     setUp(() {
-      authRepositoryImpl= MockAuthRepositoryImpl();
-      authBloc = AuthBloc(
-          authRepositoryImpl: authRepositoryImpl
-      );
+      authRepositoryImpl = MockAuthRepositoryImpl();
+      authBloc = AuthBloc(authRepositoryImpl: authRepositoryImpl);
     });
 
     test('initial state is correct', () {
       expect(authBloc.state, isA<InitialAuthState>());
     });
 
-
     blocTest(
-      'save task',
+      'login',
       setUp: () {
         when(authRepositoryImpl.signInWithGoogle())
             .thenAnswer((realInvocation) => Future.value(null));
       },
       build: () => authBloc,
       act: (bloc) => authBloc.add(AuthEventLogin()),
-      expect: () => [
-        isA<LoadingAuthState>(),
-        isA<InitialAuthState>()
-      ],
+      expect: () => [isA<LoadingAuthState>(), isA<InitialAuthState>()],
     );
-
   });
-
-
 }

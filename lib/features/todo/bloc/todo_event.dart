@@ -6,8 +6,6 @@ class SaveEventAdd extends TodoEvent {
   SaveEventAdd();
 }
 
-
-
 class AddTitleTodoEvent extends TodoEvent {
   final String title;
   AddTitleTodoEvent(this.title);

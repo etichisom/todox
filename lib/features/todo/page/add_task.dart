@@ -56,8 +56,9 @@ class TodoScreen extends StatelessWidget {
               if (state is SuccessTodoState) {
                 context.pop();
               } else if (state is ErrorTodoState) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Something went wrong, check your internet')));
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content:
+                        Text('Something went wrong, check your internet')));
               }
             },
             child: BlocBuilder<TodoBloc, TodoState>(builder: (context, state) {

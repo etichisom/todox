@@ -3,7 +3,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'todo_data.freezed.dart';
 part 'todo_data.g.dart';
 
-
 @freezed
 class TodoData with _$TodoData {
   const factory TodoData({
@@ -14,14 +13,9 @@ class TodoData with _$TodoData {
     String? time,
     String? category,
     String? note,
-    @Default(false)
-    bool status,
+    @Default(false) bool status,
   }) = _TodoData;
 
-  factory TodoData.fromJson(Map<String, dynamic> json) => _$TodoDataFromJson(json);
+  factory TodoData.fromJson(Map<String, dynamic> json) =>
+      _$TodoDataFromJson(json);
 }
-
-
-
-
-

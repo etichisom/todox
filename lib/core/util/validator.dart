@@ -1,8 +1,5 @@
-
-
 //import 'package:flutter/widgets.dart' show FormFieldValidator;
 import 'package:flutter/widgets.dart';
-
 
 class ErrorLabel extends StatelessWidget {
   ValueNotifier<String> text = new ValueNotifier("");
@@ -57,21 +54,21 @@ class Validator {
   /// Todo: Implement reason for failure
   /// For Validated passwords strings
   static bool isPassword(
-      String? password, {
-        int minLength = 4,
-        int? maxLength,
-        bool shouldContainNumber = false,
-        bool shouldContainSpecialChars = false,
-        bool shouldContainCapitalLetter = false,
-        bool shouldContainSmallLetter = false,
-        Function? reason,
-        void Function(bool)? isNumberPresent,
-        void Function(bool)? isSpecialCharsPresent,
-        void Function(bool)? isCapitalLetterPresent,
-        void Function(bool)? isSmallLetterPresent,
-        void Function()? isMaxLengthFailed,
-        void Function()? isMinLengthFailed,
-      }) {
+    String? password, {
+    int minLength = 4,
+    int? maxLength,
+    bool shouldContainNumber = false,
+    bool shouldContainSpecialChars = false,
+    bool shouldContainCapitalLetter = false,
+    bool shouldContainSmallLetter = false,
+    Function? reason,
+    void Function(bool)? isNumberPresent,
+    void Function(bool)? isSpecialCharsPresent,
+    void Function(bool)? isCapitalLetterPresent,
+    void Function(bool)? isSmallLetterPresent,
+    void Function()? isMaxLengthFailed,
+    void Function()? isMinLengthFailed,
+  }) {
     if (password == null) {
       return false;
     }
@@ -206,7 +203,6 @@ class Validator {
   _isDateGreater() {
 
   }*/
-
 }
 
 class FieldValidator {
