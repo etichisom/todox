@@ -45,6 +45,7 @@ class TodoRepositoryImpl extends TodoRepository {
       });
       listener = todoReference
           .where('uid', isEqualTo: uid)
+          .orderBy('id', descending: true)
           .snapshots()
           .listen((event) {
         List<TodoData> todoList = [];
