@@ -8,9 +8,8 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<UserCredential?> signInWithGoogle() async {
     try {
       // Trigger the authentication flow
-      final GoogleSignInAccount? googleUser = await GoogleSignIn(
-        forceCodeForRefreshToken: true
-      ).signIn();
+      final GoogleSignInAccount? googleUser =
+          await GoogleSignIn(forceCodeForRefreshToken: true).signIn();
 
       // Obtain the auth details from the request
       final GoogleSignInAuthentication? googleAuth =
