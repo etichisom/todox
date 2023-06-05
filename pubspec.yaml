@@ -57,7 +57,8 @@ dev_dependencies:
   mockito: ^5.3.2
   bloc_test: ^9.0.0
   build_runner: ^2.1.7
-
+  flutter_native_splash:
+  flutter_launcher_icons: ^0.13.1
   flutter_test:
     sdk: flutter
 
@@ -67,7 +68,13 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
-
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "asset/image/todox.png"
+  adaptive_icon_background: "#4A3780"
+  min_sdk_android: 21
+  remove_alpha_ios: true
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
