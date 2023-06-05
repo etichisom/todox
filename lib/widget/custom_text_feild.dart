@@ -21,32 +21,35 @@ class Field extends StatefulWidget {
   final int? maxLength;
   final int? maxLines;
   final String? errorText;
+  final String? initialText;
 
-  const Field(
-      {super.key,
-      this.controller,
-      this.errorText,
-      this.padding,
-      this.height = 54,
-      this.onTap,
-      this.enable = true,
-      this.validate,
-      this.hintColor = Colors.grey,
-      this.fillColor = Colors.white,
-      this.width = double.maxFinite,
-      this.obSecure = false,
-      this.borderRadius = 10,
-      this.hint = "",
-      this.textInputType = TextInputType.text,
-      this.prefixIcon,
-      this.suffixIcon,
-      this.onChanged,
-      this.contentPadding,
-      this.maxLength,
-      this.maxLines,
-      this.align,
-      this.disableBorderColor,
-      this.borderSideColor});
+  const Field({
+    super.key,
+    this.controller,
+    this.errorText,
+    this.padding,
+    this.height = 54,
+    this.onTap,
+    this.enable = true,
+    this.validate,
+    this.hintColor = Colors.grey,
+    this.fillColor = Colors.white,
+    this.width = double.maxFinite,
+    this.obSecure = false,
+    this.borderRadius = 10,
+    this.hint = "",
+    this.textInputType = TextInputType.text,
+    this.prefixIcon,
+    this.suffixIcon,
+    this.onChanged,
+    this.contentPadding,
+    this.maxLength,
+    this.maxLines,
+    this.align,
+    this.disableBorderColor,
+    this.borderSideColor,
+    this.initialText,
+  });
 
   @override
   State<Field> createState() => _FieldState();
@@ -60,6 +63,7 @@ class _FieldState extends State<Field> {
     return GestureDetector(
         onTap: widget.onTap,
         child: TextFormField(
+          initialValue: widget.initialText,
           obscureText: secure,
           onChanged: widget.onChanged,
           enabled: widget.enable,

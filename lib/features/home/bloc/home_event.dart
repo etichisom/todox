@@ -12,7 +12,8 @@ class LoadTodoRequestEvent extends HomeEvent{
   LoadTodoRequestEvent();
 }
 
-class TodoEventEdit extends HomeEvent{
+class EditTodoHomeEvent extends HomeEvent{
   final TodoData todoData;
-  TodoEventEdit(this.todoData);
+  final bool status;
+  EditTodoHomeEvent({required this.todoData, required this.status});
 }

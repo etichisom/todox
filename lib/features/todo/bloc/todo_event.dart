@@ -7,8 +7,7 @@ class TodoEventAdd extends TodoEvent {
 }
 
 class TodoEventEdit extends TodoEvent {
-  final TodoData todoData;
-  TodoEventEdit(this.todoData);
+  TodoEventEdit();
 }
 
 class AddTitleTodoEvent extends TodoEvent {

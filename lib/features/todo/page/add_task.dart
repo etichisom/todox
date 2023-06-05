@@ -9,13 +9,21 @@ import 'package:todox/core/util/helper.dart';
 import 'package:todox/features/todo/bloc/todo_bloc.dart';
 import 'package:todox/widget/custom_text_feild.dart';
 
-class AddTask extends StatelessWidget {
+enum AddTodoType { edit, create }
+
+class TodoScreen extends StatelessWidget {
   final TodoData? todoData;
-  const AddTask({Key? key, this.todoData}) : super(key: key);
+  final AddTodoType addTodoType;
+  const TodoScreen({
+    Key? key,
+    this.todoData,
+    this.addTodoType = AddTodoType.create,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => TodoBloc(
+        addTodoType: addTodoType,
         context: context,
         todoRepositoryImpl: context.read(),
         todoData: todoData,
@@ -73,6 +81,7 @@ class AddTask extends StatelessWidget {
                         height: 8.h,
                       ),
                       Field(
+                        initialText: state.todoData.title ?? "",
                         onChanged: (e) {
                           context
                               .read<TodoBloc>()
@@ -110,7 +119,10 @@ class AddTask extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(horizontal: 10),
                             child: Row(
                               children: [
-                                Text(formatDate(state.todoData.date ?? "").MMMEd),
+                                Text(
+                                  formatDate(state.todoData.date ?? "").MMMEd,
+                                  style: Theme.of(context).textTheme.titleLarge,
+                                ),
                                 const Spacer(),
                                 SvgPicture.asset('asset/image/date_icon.svg'),
                               ],
@@ -129,6 +141,7 @@ class AddTask extends StatelessWidget {
                         height: 8.h,
                       ),
                       Field(
+                        initialText: state.todoData.note ?? "",
                         onChanged: (e) {
                           context
                               .read<TodoBloc>()
@@ -171,9 +184,7 @@ class AddTask extends StatelessWidget {
       child: ElevatedButton(
         onPressed: state.todoValid
             ? () {
-                context.read<TodoBloc>().add(
-                      TodoEventAdd(),
-                    );
+                context.read<TodoBloc>().add(TodoEventAdd());
               }
             : null,
         child: const Text('Save'),

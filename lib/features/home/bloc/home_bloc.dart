@@ -30,5 +30,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         ),
       );
     });
+
+    on<EditTodoHomeEvent>((event, emit) {
+      todoRepositoryImpl.editTodo(
+        event.todoData.copyWith(status: event.status),
+      );
+    });
   }
 }

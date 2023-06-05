@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:todox/core/data/todo/todo_data.dart';
 import 'package:todox/core/theme/color.dart';
 import 'package:todox/core/util/extension.dart';
@@ -48,7 +47,7 @@ class HomeScreen extends StatelessWidget {
                     showCupertinoModalPopup(
                         context: context,
                         builder: (context) {
-                          return const AddTask();
+                          return const TodoScreen();
                         });
                   },
                   child: const Text('Add New Task')),
@@ -65,7 +64,7 @@ class HomeScreen extends StatelessWidget {
             if (state is LoadedHomeState) {
               return TabBarView(
                 children: [
-                  _todoList(state.allTodo, context, 'All'),
+                  _todoList(state.allTodo, context, ''),
                   _todoList(state.completedTodo, context, "Completed"),
                   _todoList(state.pendingTodo, context, "Pending"),
                 ],
@@ -83,9 +82,12 @@ class HomeScreen extends StatelessWidget {
       return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset('asset/gif/animation_500_lii28jc2.gif',height: 200,),
+          Image.asset(
+            'asset/gif/animation_500_lii28jc2.gif',
+            height: 200,
+          ),
           Text(
-            'No $title todo',
+            title.isEmpty ? 'Add a todo' : 'No $title todo',
             style: Theme.of(context).textTheme.titleLarge,
           ),
         ],
@@ -118,14 +120,37 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 children: [
                   ListTile(
-                    leading: SvgPicture.asset('asset/image/Category.svg'),
-                    trailing: Checkbox(
+                    trailing: GestureDetector(
+                      onTap: () {
+                        showCupertinoModalPopup(
+                          context: context,
+                          builder: (context) {
+                            return TodoScreen(
+                              todoData: data,
+                              addTodoType: AddTodoType.edit,
+                            );
+                          },
+                        );
+                      },
+                      child: const Icon(Icons.edit),
+                    ),
+                    leading: Checkbox(
+                      activeColor: AppColors.primary900,
                       value: data.status,
-                      onChanged: (e) {},
+                      onChanged: (e) {
+                        context.read<HomeBloc>().add(
+                              EditTodoHomeEvent(
+                                todoData: data,
+                                status: e ?? false,
+                              ),
+                            );
+                      },
                     ),
                     title: Text(
                       (data.title ?? "").capitalizeFirstChar(),
-                      style: Theme.of(context).textTheme.titleLarge,
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          decoration:
+                              data.status ? TextDecoration.lineThrough : null),
                     ),
                     subtitle: Text(
                       formatDate(data.date ?? "").MMMEd,
