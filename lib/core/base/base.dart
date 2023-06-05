@@ -9,13 +9,14 @@ class BasePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) {
-          if (snapshot.data == null) {
-            return const Login();
-          } else {
-            return const HomeScreen();
-          }
-        });
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        if (snapshot.data == null) {
+          return const Login();
+        } else {
+          return const HomeScreen();
+        }
+      },
+    );
   }
 }

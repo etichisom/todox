@@ -2,7 +2,7 @@
 import 'package:flutter/widgets.dart';
 
 class ErrorLabel extends StatelessWidget {
-  ValueNotifier<String> text = new ValueNotifier("");
+  ValueNotifier<String> text = ValueNotifier("");
 
   // final String text;
   final TextStyle? style;
@@ -14,7 +14,7 @@ class ErrorLabel extends StatelessWidget {
     return ValueListenableBuilder(
         valueListenable: text,
         builder: (BuildContext context, String value, Widget? child) {
-          return Text("");
+          return const Text("");
         });
   }
 }
