@@ -97,7 +97,7 @@ class HomeScreen extends StatelessWidget {
             height: 200,
           ),
           Text(
-            title.isEmpty ? 'Add a todo' : 'No $title todo',
+            title.isEmpty ? 'Add a task' : 'No $title task',
             style: Theme.of(context).textTheme.titleLarge,
           ),
         ],
