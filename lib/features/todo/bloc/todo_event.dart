@@ -2,13 +2,11 @@ part of 'todo_bloc.dart';
 
 abstract class TodoEvent {}
 
-class TodoEventAdd extends TodoEvent {
-  TodoEventAdd();
+class SaveEventAdd extends TodoEvent {
+  SaveEventAdd();
 }
 
-class TodoEventEdit extends TodoEvent {
-  TodoEventEdit();
-}
+
 
 class AddTitleTodoEvent extends TodoEvent {
   final String title;
@@ -21,7 +19,8 @@ class AddNoteTodoEvent extends TodoEvent {
 }
 
 class AddDateTodoEvent extends TodoEvent {
-  AddDateTodoEvent();
+  final DateTime? pickedDate;
+  AddDateTodoEvent(this.pickedDate);
 }
 
 class AddTimeTodoEvent extends TodoEvent {

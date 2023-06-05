@@ -22,6 +22,19 @@ class HomeScreen extends StatelessWidget {
         length: 3,
         child: Scaffold(
           appBar: AppBar(
+            actions: [
+              BlocBuilder<HomeBloc, HomeState>(
+                  builder:(context,state){
+                    return  IconButton(
+                      onPressed: () {
+                        context.read<HomeBloc>().add(LogoutHomeEvent());
+                      },
+                      icon: Icon(Icons.logout),
+                    );
+                  }
+              ),
+
+            ],
             bottom: const TabBar(
               indicatorColor: Colors.white,
               tabs: [
@@ -96,6 +109,7 @@ class HomeScreen extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
       child: ListView.builder(
+        physics: const BouncingScrollPhysics(),
           itemCount: todos.length,
           itemBuilder: (context, index) {
             var data = todos[index];

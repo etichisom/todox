@@ -1,31 +1,40 @@
 part of 'todo_bloc.dart';
 
-abstract class TodoState {
+abstract class TodoState extends Equatable {
   final TodoData todoData;
-  TodoState(this.todoData);
+  const TodoState(this.todoData);
 
-
-  bool  get todoValid{
-    if(todoData.note!=null&&todoData.title!=null&&todoData.date!=null){
+  bool get todoValid {
+    if (todoData.note != null &&
+        todoData.title != null &&
+        todoData.date != null) {
       return true;
     }
     return false;
   }
-
 }
 
 class InitialTodoState extends TodoState {
-  InitialTodoState(super.todoData);
+  const InitialTodoState(super.todoData);
+
+  @override
+  List<Object?> get props => [todoData];
 }
 
 class LoadingTodoState extends TodoState {
-  LoadingTodoState(super.todoData);
+  const LoadingTodoState(super.todoData);
+  @override
+  List<Object?> get props => [todoData];
 }
 
 class SuccessTodoState extends TodoState {
-  SuccessTodoState(super.todoData);
+  const SuccessTodoState(super.todoData);
+  @override
+  List<Object?> get props => [todoData];
 }
 
 class ErrorTodoState extends TodoState {
-  ErrorTodoState(super.todoData);
+  const ErrorTodoState(super.todoData);
+  @override
+  List<Object?> get props => [todoData];
 }

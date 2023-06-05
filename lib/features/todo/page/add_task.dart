@@ -24,7 +24,6 @@ class TodoScreen extends StatelessWidget {
     return BlocProvider(
       create: (_) => TodoBloc(
         addTodoType: addTodoType,
-        context: context,
         todoRepositoryImpl: context.read(),
         todoData: todoData,
       ),
@@ -104,7 +103,19 @@ class TodoScreen extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                          context.read<TodoBloc>().add(AddDateTodoEvent());
+                          showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(), //get today's date
+                            firstDate: DateTime
+                                .now(), //DateTime.now() - not to allow to choose before today.
+                            lastDate: DateTime.now().add(
+                              const Duration(days: 1000),
+                            ),
+                          ).then((value) {
+                            context
+                                .read<TodoBloc>()
+                                .add(AddDateTodoEvent(value));
+                          });
                         },
                         child: Container(
                           height: 55,
@@ -187,7 +198,7 @@ class TodoScreen extends StatelessWidget {
       child: ElevatedButton(
         onPressed: state.todoValid
             ? () {
-                context.read<TodoBloc>().add(TodoEventAdd());
+                context.read<TodoBloc>().add(SaveEventAdd());
               }
             : null,
         child: const Text('Save'),

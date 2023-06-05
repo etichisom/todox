@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:todox/core/data/todo/todo_data.dart';
 import 'package:todox/features/todo/data/repository/todo_repo_impl.dart';
 import 'package:todox/features/todo/page/add_task.dart';
@@ -10,23 +10,22 @@ part 'todo_state.dart';
 
 class TodoBloc extends Bloc<TodoEvent, TodoState> {
   final TodoRepositoryImpl todoRepositoryImpl;
-  final BuildContext context;
+
   final TodoData? todoData;
   final AddTodoType addTodoType;
   TodoBloc({
     required this.todoRepositoryImpl,
-    required this.todoData,
-    required this.context,
+    this.todoData,
     required this.addTodoType,
   }) : super(InitialTodoState(todoData ?? const TodoData())) {
-    on<TodoEventAdd>((event, emit) async {
+    on<SaveEventAdd>((event, emit) async {
       try {
         emit(LoadingTodoState(state.todoData));
         if (addTodoType == AddTodoType.edit) {
           await todoRepositoryImpl.editTodo(state.todoData);
         } else {
           await todoRepositoryImpl.addTodo(state.todoData.copyWith(
-            uid: FirebaseAuth.instance.currentUser?.uid,
+            uid: FirebaseAuth.instance.currentUser?.uid??"",
             id: DateTime.now().millisecondsSinceEpoch.toString(),
           ));
         }
@@ -39,21 +38,12 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
       }
     });
 
-    on<AddDateTodoEvent>((event, emit) async {
-      DateTime? pickedDate = await showDatePicker(
-        context: context,
-        initialDate: DateTime.now(), //get today's date
-        firstDate: DateTime
-            .now(), //DateTime.now() - not to allow to choose before today.
-        lastDate: DateTime.now().add(
-          const Duration(days: 1000),
-        ),
-      );
-      if (pickedDate != null) {
+    on<AddDateTodoEvent>((event, emit) {
+      if (event.pickedDate != null) {
         emit(
           InitialTodoState(
             state.todoData.copyWith(
-              date: pickedDate.toString(),
+              date: event.pickedDate.toString(),
             ),
           ),
         );
@@ -68,6 +58,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
           ),
         ),
       );
+
     });
 
     on<AddNoteTodoEvent>((event, emit) {

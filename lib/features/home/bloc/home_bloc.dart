@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:todox/core/data/todo/todo_data.dart';
 import 'package:todox/features/todo/data/repository/todo_repo_impl.dart';
 
@@ -11,7 +12,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<LoadTodoRequestEvent>((event, emit) async {
       try {
         emit(LoadingHomeState());
-        todoRepositoryImpl.getTodo().listen((event) async {
+        todoRepositoryImpl
+            .getTodo(FirebaseAuth.instance.currentUser?.uid ?? "")
+            .listen((event) async {
           add(LoadTodoHomeEvent(event));
         });
       } catch (e) {
@@ -35,6 +38,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       todoRepositoryImpl.editTodo(
         event.todoData.copyWith(status: event.status),
       );
+    });
+
+    on<LogoutHomeEvent>((event, emit) {
+      FirebaseAuth.instance.signOut();
     });
   }
 }

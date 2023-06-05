@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:todox/core/data/todo/todo_data.dart';
 import 'package:todox/core/exceptions/app_excpetion.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -35,7 +33,7 @@ class TodoRepositoryImpl extends TodoRepository {
   }
 
   @override
-  Stream<List<TodoData>> getTodo() {
+  Stream<List<TodoData>> getTodo(String uid) {
     try {
       StreamSubscription? listener;
       StreamController<List<TodoData>> todo = StreamController(onCancel: () {
@@ -44,7 +42,7 @@ class TodoRepositoryImpl extends TodoRepository {
         }
       });
       listener = todoReference
-          .where('uid', isEqualTo: FirebaseAuth.instance.currentUser?.uid ?? "")
+          .where('uid', isEqualTo: uid)
           .snapshots()
           .listen((event) {
         List<TodoData> todoList = [];

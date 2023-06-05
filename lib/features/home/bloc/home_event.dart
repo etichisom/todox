@@ -17,3 +17,7 @@ class EditTodoHomeEvent extends HomeEvent{
   final bool status;
   EditTodoHomeEvent({required this.todoData, required this.status});
 }
+
+class LogoutHomeEvent extends HomeEvent{
+  LogoutHomeEvent();
+}
