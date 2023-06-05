@@ -120,7 +120,10 @@ class TodoScreen extends StatelessWidget {
                             child: Row(
                               children: [
                                 Text(
-                                  formatDate(state.todoData.date ?? "").MMMEd,
+                                  state.todoData.date != null
+                                      ? formatDate(state.todoData.date ?? "")
+                                          .MMMEd
+                                      : '',
                                   style: Theme.of(context).textTheme.titleLarge,
                                 ),
                                 const Spacer(),
