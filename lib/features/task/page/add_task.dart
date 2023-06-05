@@ -57,7 +57,7 @@ class TodoScreen extends StatelessWidget {
                 context.pop();
               } else if (state is ErrorTodoState) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Something went wrong')));
+                    const SnackBar(content: Text('Something went wrong, check your internet')));
               }
             },
             child: BlocBuilder<TodoBloc, TodoState>(builder: (context, state) {
@@ -95,7 +95,7 @@ class TodoScreen extends StatelessWidget {
                         height: 24.h,
                       ),
                       Text(
-                        'Date',
+                        'Due date',
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       SizedBox(
