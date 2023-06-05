@@ -31,10 +31,8 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
         }
         emit(SuccessTodoState(state.todoData));
       } catch (e) {
+        print(e.toString());
         emit(ErrorTodoState(state.todoData));
-        Future.delayed(const Duration(seconds: 2), () {
-          emit(InitialTodoState(state.todoData));
-        });
       }
     });
 

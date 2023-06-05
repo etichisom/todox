@@ -13,7 +13,7 @@ class TodoRepositoryImpl extends TodoRepository {
     try {
       await todoReference
           .doc(todoData.id ?? DateTime.now().millisecondsSinceEpoch.toString())
-          .set(todoData.toJson());
+          .set(todoData.toJson()).timeout(Duration(seconds: 5));
       return true;
     } catch (e) {
       throw ServerError('Something went wrong');
@@ -23,11 +23,13 @@ class TodoRepositoryImpl extends TodoRepository {
   @override
   Future<bool> editTodo(TodoData todoData) async {
     try {
+      print('hahha');
       await todoReference
           .doc(todoData.id ?? DateTime.now().millisecondsSinceEpoch.toString())
-          .update(todoData.toJson());
+          .update(todoData.toJson()).timeout(Duration(seconds: 5));
       return true;
     } catch (e) {
+      print(e);
       throw ServerError('Something went wrong');
     }
   }
