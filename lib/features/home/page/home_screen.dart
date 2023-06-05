@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
                   onPressed: () {
                     context.read<HomeBloc>().add(LogoutHomeEvent());
                   },
-                  icon: Icon(Icons.logout),
+                  icon: const Icon(Icons.logout),
                 );
               }),
             ],
