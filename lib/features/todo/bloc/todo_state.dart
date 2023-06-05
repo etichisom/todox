@@ -5,9 +5,9 @@ abstract class TodoState extends Equatable {
   const TodoState(this.todoData);
 
   bool get todoValid {
-    if (todoData.note != null &&
-        todoData.title != null &&
-        todoData.date != null) {
+    if ((todoData.note ?? "").isNotEmpty &&
+        (todoData.title ?? "").isNotEmpty &&
+        (todoData.date ?? "").isNotEmpty) {
       return true;
     }
     return false;
