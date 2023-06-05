@@ -36,7 +36,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ),
-            title: const Text('My Todo List'),
+            title: const Text('My Task List'),
           ),
           bottomNavigationBar: Padding(
             padding: const EdgeInsets.all(16.0),
