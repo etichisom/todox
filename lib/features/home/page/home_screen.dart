@@ -155,7 +155,9 @@ class HomeScreen extends StatelessWidget {
                     subtitle: Text(
                       formatDate(data.date ?? "").MMMEd,
                       style: TextStyle(
-                          fontSize: 14.sp, fontWeight: FontWeight.w500),
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                   index == todos.length - 1
